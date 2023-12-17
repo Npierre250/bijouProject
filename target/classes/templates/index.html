@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<title>Home</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" th:href="@{'../css/bootstrap/bootstrap.min.css'}" >
+<script th:src="@{../js/bootstrap.min.js}"></script>
+<style>
+    
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+  background-image: url('asset/memory.jpg');
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+
+</style>
+<body>
+    
+<nav class="navbar navbar-expand-md navbar-dark bg-transparent fixed-top mx-5">
+    <a class="navbar-brand p-2 mx-5" href="#">logo</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation"></button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" href="#" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#signin">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'/register'}">Register</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+<div class="bgimg">
+  <div class="p-5 text-light fw-bolder col-sm-5 m-auto " >
+    <div class="alert alert-secondary alert-dismissible fade show" role="alert" th:if="${!message.isEmpty()}">
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <strong th:text="${message}">Alert Heading</strong>
+    </div>
+    
+    <script>
+      var alertList = document.querySelectorAll('.alert');
+      alertList.forEach(function (alert) {
+        new bootstrap.Alert(alert)
+      })
+    </script>
+    
+    <h1 class="text-center   border rounded p-5" style="background-color: rgba(158, 196, 196, 0.514);margin-top: 105px;"><span>When Someone you love becomes amemory the memory become treasure</span><br>
+      <a  class="btn btn-transparent border border-dark text-light fw-bolder" th:href="@{'/register'}" role="button">Register</a>
+    </h1>
+   
+  </div>
+
+</div>
+<!-- Modal Control -->
+<section>
+    <div class="modal fade" id="signin" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content p-3">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalToggleLabel">SIGN IN</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!--  -->
+              <form action="" method="post">
+                <div class="mb-3">
+                  <label for="" class="form-label">Username</label>
+                  <input type="email"
+                    class="form-control  border-bottom border-dark" name="username"   aria-describedby="helpId" placeholder="">
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Password</label>
+                    <input type="password"
+                      class="form-control  border-bottom border-dark" name="password" aria-describedby="helpId" placeholder="">
+                  </div>
+                  <p class="text-dark">Click here if you <a class="text-primary fw-bolder" style="cursor: pointer;" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">forget password?</a></p>
+              <div class="d-grid gap-2">
+                <button type="submit"  class="btn btn-secondary rounded">Log in</button>
+              </div>
+                </form>
+            </div>
+            <div class="modal-footer border-dark">
+              <div class="" style="cursor: pointer;" >If you don't have anaccount <a class="text-primary fw-bolder" href="">Create an account</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content p-2">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalToggleLabel2">Reset Password</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+           <div class="form-floating mb-3">
+             <input
+               type="email"
+               class="form-control" name="formId1" id="formId1" placeholder="">
+             <label for="formId1">Email</label>
+           </div>
+            </div>
+            <div class="modal-footer border-dark">
+              <button class="btn btn-dark" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+</section>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Star Admin Premium Bootstrap Admin Dashboard Template</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link th:href="@{'../css/bootstrap/bootstrap.min.css'}" rel="stylesheet">
+    <script th:src="@{'../js/bootstrap.min.js'}">
+      </script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center">
+       <h2 class="fw-bolder">Admin Dashboard</h2>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper ">
+        <nav class="sidebar sidebar-offcanvas " id="sidebar">
+          <ul class="nav">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                    <i class="bi bi-person-circle fs-1"></i>
+              </a>
+            </li>
+            <li class="nav-item nav-category fw-bolder text-center">Admin</li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{'/admin'}">
+                <i class="menu-icon typcn typcn-document-text"></i>
+                <span class="menu-title">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item bg-secondary">
+                <a class="nav-link " th:href="@{'/admin/tomb'}">
+                  <span class="menu-title">Tomb</span>
+                </a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{'/admin/maintenance'}">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Maintainance</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{'/admin/decease'}">
+                <span class="menu-title">Decease</span>
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'/admin/customer'}">
+                  <span class="menu-title">Customer</span>
+                </a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{'/admin/request'}">
+                <span class="menu-title">Requests</span>
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'/admin/payments'}">
+                  <span class="menu-title">Payment</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{'/admin/account'}">
+                  <span class="menu-title">Account</span>
+                </a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" th:href="@{'/logout?logout'}">
+                  <span class="menu-title">Sign out</span>
+                </a>
+              </li>
+          </ul>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <!-- Page Title Header Starts-->
+            <div class="row page-title-header">
+            <!-- Page Title Header Ends-->
+            <div class="row">
+              <div class="col-md-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-lg-3 col-md-6">
+                        <div class="d-flex">
+                            <div class="wrapper text-center row">
+                                <div class="col-sm-4"><i class="bi bi-person-circle fs-1 text-primary"></i></div>
+                                <div class="col-sm-8">
+                                    <h3 class="mb-0 font-weight-semibold" th:text="${customerList.size()}">17</h3>
+                                <p class="mb-0 text-muted">Total User</p>
+                                </div>
+                              </div>
+                          <div class="wrapper my-auto ml-auto ml-lg-4">
+                            <canvas height="50" width="100" id="stats-line-graph-1"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 mt-md-0 mt-4">
+                        <div class="d-flex">
+                          <div class="wrapper text-center">
+                            <h3 class="mb-0 font-weight-semibold"><span th:text="${tombList.size()}"></span></h3>
+                            <p class="mb-0 text-muted">Total Tomb</p>
+                          </div>
+                          <div class="wrapper my-auto ml-auto ml-lg-4">
+                            <canvas height="50" width="100" id="stats-line-graph-2"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 mt-md-0 mt-4">
+                        <div class="d-flex">
+                          <div class="wrapper text-center">
+                            <h3 class="mb-0 font-weight-semibold">8</h3>
+                            <p class="mb-0 text-muted">Orders</p>
+                          </div>
+                          <div class="wrapper my-auto ml-auto ml-lg-4">
+                            <canvas height="50" width="100" id="stats-line-graph-3"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 mt-md-0 mt-4">
+                        <div class="d-flex">
+                          <div class="wrapper text-center">
+                            <h3 class="mb-0 font-weight-semibold">1</h3>
+                            <p class="mb-0 text-muted">Mainteinance</p>
+                          </div>
+                          <div class="wrapper my-auto ml-auto ml-lg-4">
+                            <canvas height="50" width="100" id="stats-line-graph-4"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+      <!--  -->
+      
+<!--  -->
+<div class="row">
+    <div class="col-md-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+            <button type="button" class="btn btn-secondary mb-2" data-bs-toggle="modal" data-bs-target="#add">Add Tomb</button>
+          <div class="table-responsive">
+            <table class="table table-secondary">
+                <thead>
+                    <tr>
+                        <th scope="col">Tomb Number</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Cost [FRW]</th>
+                        <th scope="col">Has Booked</th>
+                        <th>Others</th>
+                        <th>Description</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="tomb :${tombList}" th:if="${tomb.isbooked==false}">
+                        <td th:text="${tomb.id}">R1C1</td>
+                        <td th:text="${tomb.category}">R1C1</td>
+                        <td><span th:text="${tomb.cost}"> <b>FRW</b></span></td>
+                        <td>
+                          <div th:if="${tomb.isbooked==true}">
+                            <span>Yes</span>
+                          </div>
+                          <div th:if="${tomb.isbooked==false}">
+                            <span>No</span>
+                          </div>
+                        </td>
+                        <td>
+                          <div><b>width:</b> <span th:text="${tomb.width}+' cm'"></span></div>
+                          <div><b>Height:</b> <span th:text="${tomb.length}+' cm'"></span></div>
+                          <div><b><i class="bi bi-geo-alt-fill"></i></b> <span th:text="${tomb.location}"></span></div>
+                        </td>
+                        <td th:text="${tomb.description}"></td>
+                        <th scope="col">
+                          <div th:if="${tomb.isbooked==false}">
+                          <a th:id="${tomb.id}+'&'+${tomb.cost}+'&'+${tomb.width}+'&'+${tomb.length}+'&'+${tomb.description}+'&'+${tomb.location}" onclick="getId(this)" data-bs-toggle="modal" data-bs-target="#update" class="btn btn-primary rounded" href="#" role="button"> <i class="bi bi-pencil"></i> </a></th>
+                        </div>
+                        </tr>
+                  
+                </tbody>
+              
+            </table>
+          </div>
+          
+        </div>
+    </div>
+    </div>
+   </div> 
+   <script>
+    function getId(button) {
+        var id = button.id;
+        var data=id.split('&');
+        document.getElementById('Iid').value=data[0]; 
+      document.getElementById('cost').value=data[1];
+      document.getElementById('Twidth').value=data[2];
+      document.getElementById('Tlength').value=data[3];
+      document.getElementById('Tdescription').innerHTML=data[4];
+      document.getElementById('Tlocation').value=data[5];
+    }
+   </script>
+   <!--  -->
+   
+   <!-- Modal Body -->
+   <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+   <div class="modal fade" id="add" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">Add Tomb</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{'/admin/tomb'}" th:object="${tomb}" method="post">
+                    <div class="form-floating mb-3">
+                      <input
+                        type="text" th:field="*{cost}" required
+                        class="form-control" name="cost" id="formId1" placeholder="">
+                      <label for="formId1">Cost</label>
+                    </div>
+                    <div class="mb-3">
+                        <label   class="form-label">Person Category</label>
+                        <select  class="form-select form-select-lg" th:select="*{category}" name="category" required>
+                            <option value="">Select category</option>
+                            <option th:select="'Kid'">Kid</option>
+                            <option th:select="'Teen Age'">Teen Age</option>
+                            <option th:select="'Other'">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" th:field="*{width}" placeholder="">
+                      <label >Width</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" th:field="*{length}" placeholder="">
+                      <label >Length</label>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Description</label>
+                      <textarea th:field="*{description}" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" th:field="*{location}" placeholder="">
+                      <label >Location</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-light border rounded">Add tomb</button>
+                    </div>
+                </form>
+            </div>
+           
+        </div>
+    </div>
+   </div>
+   <!--  -->
+   <div class="modal fade" id="update" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">Update Tomb</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form th:action="@{'/admin/tomb'}" th:object="${tomb}" method="post">
+                <input type="hidden" id="Iid" th:field="*{id}" >
+                <div class="form-floating mb-3">
+                  <input
+                    type="text" th:field="*{cost}" required
+                    class="form-control" name="cost" id="cost">
+                  <label for="formId1">Cost</label>
+                </div>
+
+                <div class="mb-3">
+                    <label   class="form-label">Person Category</label>
+                    <select  class="form-select form-select-lg" th:select="*{category}" name="category" required>
+                        <option value="">Select category</option>
+                        <option th:select="'Kid'">Kid</option>
+                        <option th:select="'Teen Age'">Teen Age</option>
+                        <option th:select="'Other'">Other</option>
+                    </select>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" th:field="*{width}" id="Twidth">
+                  <label >Width</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" th:field="*{length}" id="Tlength">
+                  <label >Length</label>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Description</label>
+                  <textarea th:field="*{description}" class="form-control" id="Tdescription" rows="3"></textarea>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" th:field="*{location}" id="Tlocation">
+                  <label >Location</label>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn  btn-outline-secondary border rounded">Update tomb</button>
+                </div>
+            </form>
+            </div>
+           
+        </div>
+    </div>
+   </div>
+  </body>
+</html>

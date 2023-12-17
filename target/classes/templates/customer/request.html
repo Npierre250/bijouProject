@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>request</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link th:href="@{'../css/bootstrap/bootstrap.min.css'}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous"> 
+<script th:src="@{'../js/bootstrap.min.js'}">
+      </script>
+    <link rel="stylesheet" th:href="@{'../style.css'}">
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center">
+       <h2 class="fw-bolder"><span th:text="${authUser.names}"></span></h2>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper ">
+        <nav class="sidebar sidebar-offcanvas " id="sidebar">
+          <ul class="nav">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                    <i class="bi bi-person-circle fs-1"></i>
+              </a>
+            </li>
+            <li class="nav-item nav-category fw-bolder text-center" th:text="${authUser.names}">Admin</li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{'/user'}">
+                <i class="menu-icon typcn typcn-document-text"></i>
+                <span class="menu-title">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link bg-secondary" th:href="@{'/user/request'}">
+                  <span class="menu-title">Request</span>
+                </a>
+              </li>
+            <li class="nav-item ">
+              <a class="nav-link" th:href="@{/user/account}">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Account</span>
+              </a>
+            </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" th:href="@{'/logout?logout'}">
+                  <span class="menu-title">Sign out</span>
+                </a>
+              </li>
+          </ul>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <!-- Page Title Header Starts-->
+            <div class="row page-title-header">
+            <!-- Page Title Header Ends-->
+           
+      <!--  -->
+      <div class="mb-2">
+        <div class="col-md-12 grid-margin">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6 text-center col-md-6 mt-md-0 mt-4">
+                  <div class="d-flex">
+                    <div class="wrapper text-center">
+                      <h3 class="mb-0 font-weight-semibold">8</h3>
+                      <p class="mb-0 text-muted">Total Request</p>
+                    </div>
+                    <div class="wrapper my-auto ml-auto ml-lg-4">
+                      <canvas height="50" width="100" id="stats-line-graph-3"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 text-center col-md-6 mt-md-0 mt-4">
+                  <div class="d-flex">
+                    <div class="wrapper text-center">
+                      <h3 class="mb-0 font-weight-semibold">1</h3>
+                      <p class="mb-0 text-muted">Messages</p>
+                    </div>
+                    <div class="wrapper my-auto ml-auto ml-lg-4">
+                      <canvas height="50" width="100" id="stats-line-graph-4"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<!--  -->
+
+   <div class="col-md-12 grid-margin mt-1 rounded">
+    <div class="card">
+      <div class="card-body">
+        <nav class="fw-bolder">List of Available Requests</nav>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#add">Request A service</button>
+        </div>
+        </div>
+        </div> 
+        <div class="table-responsive">
+            <table class="table table-striped-columns
+            table-hover	
+            table-borderless
+            table-light
+            align-middle">
+                <thead class="table-light">
+                    <caption>Table Name</caption>
+                    <tr>
+                        <th>Decease</th>
+                        <th>payment</th>
+                        <th>Tomb</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <tr class="table-light" th:each="payment : ${authUser.listOfpayments}">
+                            <td scope="row">
+                              <div><b>Name</b><span></span></div>
+                              <div><b>Gender</b><span></span></div>
+                              <div><b>Dob</b><span></span></div>
+                              <div><b>Decease Date</b><span></span></div>
+                            </td>
+                            <td>
+                              <div><b>Payment :</b><span th:text="${payment.tombId.cost}"></span> FRW</div>
+                              <div><b>Payment Status: </b><span th:text="${payment.status}"></span></div>
+                              <div><b>Payment code:</b><span th:text="${payment.paymentCode}"></span></div>
+                              <div><b>Payment Date:</b><span th:text="${payment.paymentDate}"></span></div>
+                            </td>
+                            <td>
+                              <div><b>Tomb Id :</b><span th:text="${payment.tombId.id}"></span></div> 
+                              <div><b>Tomb category :</b><span th:text="${payment.tombId.category}"></span></div>  
+                            </td>
+                            <td></td>
+                        </tr>
+                        
+                    </tbody>
+                    <tfoot>  
+                    </tfoot>
+            </table>
+        </div>
+  <!-- Modal trigger button -->
+  <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+  <div class="modal fade" id="add" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div  class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+      <div  style="background: linear-gradient(rgb(36, 86, 161),rgba(26, 23, 23, 0.911));" class="modal-content text-light">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitleId">Add A Service</h5>
+            <button type="button" class="btn-close text-light" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-4 border rounded" style="background-color: rgb(12, 53, 87);">
+              <div class="mt-5 text-center fw-bolder text-light">He will wipe every tear from their eyes. There will be no more death’ or mourning or crying or pain,
+                 for the old order of things has passed away.</div>
+            </div>
+            <div class="col-sm-8">
+              <!--  -->
+              <form action="/user/request" method="post">
+                <div class="bg-warning fw-bolder text-dark"><i class="bi bi-exclamation-triangle  text-danger fs-1"></i> Know that any of service is paid 5000 frw</div>
+                <input type="hidden" name="userId" th:value="${authUser.id}">
+                <div class="mb-3">
+                  <label  class="form-label">Service Name</label>
+                  <select class="form-select form-select-lg" name="serviceName" id="">
+                    <option value="">Select service</option>
+                    <option value="Visit">Visit</option>
+                    <option value="Maintenance">Maintenance</option>
+                  </select>
+                </div> 
+                <!--  -->
+               <div class="form-floating mb-3">
+                 <input
+                   type="text"
+                   class="form-control" name="tombId" id="formId1" placeholder="">
+                 <label for="formId1" class="text-dark fw-bolder">Tomb Number</label>
+               </div>
+               <div class="form-floating mb-3">
+                 <input
+                   type="date" pattern="yyyy-MM-dd"
+                   class="form-control" name="dateOfService" id="formId1" placeholder="">
+                 <label for="formId1">Visiting Date</label>
+               </div>
+               <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>  
+  </body>
+</html>

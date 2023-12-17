@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Star Admin Premium Bootstrap Admin Dashboard Template</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link th:href="@{'css/bootstrap/bootstrap.min.css'}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+      </script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center">
+       <h2 class="fw-bolder" th:text="${authUser.names}">Admin Dashboard</h2>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper ">
+        <nav class="sidebar sidebar-offcanvas " id="sidebar">
+          <ul class="nav">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                    <i class="bi bi-person-circle fs-1"></i>
+              </a>
+            </li>
+            <li class="nav-item nav-category fw-bolder text-center">Admin</li>
+            <li class="nav-item bg-secondary">
+              <a class="nav-link" th:href="@{'/admin'}">
+                <i class="menu-icon typcn typcn-document-text"></i>
+                <span class="menu-title">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'/admin/tomb'}">
+                  <span class="menu-title">Tomb</span>
+                </a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{'/admin/maintenance'}">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Maintainance</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{'/admin/decease'}">
+                <span class="menu-title">Decease</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{'/admin/customer'}">
+                <span class="menu-title">Customer</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{'/admin/request'}">
+                <span class="menu-title">Requests</span>
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'/admin/payments'}">
+                  <span class="menu-title">Payment</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{'/admin/account'}">
+                  <span class="menu-title">Account</span>
+                </a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" th:href="@{'/logout?logout'}">
+                  <span class="menu-title">Sign out</span>
+                </a>
+              </li>
+          </ul>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <!-- Page Title Header Starts-->
+            <div class="row page-title-header">
+            <!-- Page Title Header Ends-->
+            <div class="row">
+              <div class="col-md-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-lg-3 col-md-6">
+                        <div class="d-flex">
+                          <div class="wrapper text-center row">
+                            <div class="col-sm-4"><i class="bi bi-person-circle fs-1 text-primary"></i></div>
+                            <div class="col-sm-8">
+                                <h3 class="mb-0 font-weight-semibold" th:text="${customerList.size()}">17</h3>
+                            <p class="mb-0 text-muted">Total User</p>
+                            </div>
+                          </div>
+                          <div class="wrapper my-auto ml-auto ml-lg-4">
+                            <canvas height="50" width="100" id="stats-line-graph-1"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 mt-md-0 mt-4">
+                        <div class="d-flex">
+                          <div class="wrapper text-center">
+                            <h3 class="mb-0 font-weight-semibold"><span th:text="${tombList.size()}"></span></h3>
+                            <p class="mb-0 text-muted">Total Tomb</p>
+                          </div>
+                          <div class="wrapper my-auto ml-auto ml-lg-4">
+                            <canvas height="50" width="100" id="stats-line-graph-2"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 mt-md-0 mt-4">
+                        <div class="d-flex">
+                          <div class="wrapper text-center">
+                            <h3 class="mb-0 font-weight-semibold"><span th:text="${deceaseList.size()}"></span></h3>
+                            <p class="mb-0 text-muted">Total Decease</p>
+                          </div>
+                          <div class="wrapper my-auto ml-auto ml-lg-4">
+                            <canvas height="50" width="100" id="stats-line-graph-3"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 mt-md-0 mt-4">
+                        <div class="d-flex">
+                          <div class="wrapper text-center row">
+                            <div class="col-sm-4"><i class="bi bi-coin fs-1 text-primary"></i></div>
+                            <div class="col-sm-8">
+                                <h6 class="mb-0 font-weight-semibold" ><span th:text="${totalPayment}"></span> Frw</h6>
+                            <p class="mb-0 text-muted">Total Payment</p>
+                            </div>
+                          </div>
+                          <div class="wrapper my-auto ml-auto ml-lg-4">
+                            <canvas height="50" width="100" id="stats-line-graph-4"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+      <!--  -->
+      <div class="row">
+        <div class="col-md-12 grid-margin">
+          <div class="card">
+            <div class="card-body fw-bolder">
+              List of Remaining tomb
+            </div>
+          </div>
+        </div>
+      </div>
+<div class="row">
+    <div class="col-md-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-4"  th:each="tomb :${tombList}" th:if="${tomb.isbooked}==false">
+              <div  class="border border-secondary rounded p-3 mb-3 ">
+              <div><b>Tomb Number </b><span th:text="${tomb.id}"> </span></div>
+              <div><b>Length </b><span th:text="${tomb.length}+ ' cm'"> </span></div>
+              <div><b>Width </b><span th:text="${tomb.width}+ ' cm'"> </span></div>
+              <div><b>Cost </b><span th:text="${tomb.cost}"></span> Frw</div>
+              <div class="mb-3"><b>Category </b><span th:text="${tomb.category}"> </span></div>
+              <div class="text-muted" style="font-style: italic;">Location <span th:text="${tomb.location}"></span></div>
+              </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    </div>
+   </div> 
+   <!-- booked -->
+   <div class="row">
+    <div class="col-md-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-4"  th:each="tomb :${tombList}" th:if="${tomb.isbooked}==true">
+              <div  class="border border-secondary rounded p-3 mb-3 ">
+              <div><b>Tomb Number </b><span th:text="${tomb.id}"> </span></div>
+              <div><b>Length </b><span th:text="${tomb.length}+ ' cm'"> </span></div>
+              <div><b>Width </b><span th:text="${tomb.width}+ ' cm'"> </span></div>
+              <div><b>Cost </b><span th:text="${tomb.cost}"></span> Frw</div>
+              <div class="mb-3"><b>Category </b><span th:text="${tomb.category}"> </span></div>
+              <div class="text-muted" style="font-style: italic;">Location <span th:text="${tomb.location}"></span></div>
+              </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    </div>
+   </div> 
+    <div class="col-md-12 grid-margin">
+      <div class="card">
+        <div class="card-body fw-bolder">
+          List of Taken tomb
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <div class="col-12 m-auto row" >
+            <div class="col-sm-4"  th:each="tomb :${tombList}" th:if="${tomb.isbooked}==true">
+              <div  class="border border-secondary rounded p-3 mb-3 ">
+                <div><b>Tomb Number </b><span th:text="${tomb.id}"> </span></div>
+              <div><div th:each="decease:${tomb.deceaseId}">
+                <div><b>Decease name </b><span th:text="${decease.name}"></span></div>
+                <div><b>Decease Gender </b><span th:text="${decease.gender}"></span></div>
+                <div><b>Category </b><span th:text="${tomb.category}"> </span></div>
+                <div class="mb-2"><b>Cost </b><span th:text="${tomb.cost}"></span> Frw</div>
+                <div class="text-muted"><span th:text="${decease.dob}+' - '+${decease.deceaseDate}"></span></div>
+              </div>
+            </div>
+              
+              <div class="text-muted" style="font-style: italic;">Location <span th:text="${tomb.location}"></span></div>
+              </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    </div>
+   </div> 
+  </body>
+</html>

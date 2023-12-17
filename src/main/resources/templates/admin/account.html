@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Account</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link th:href="@{'../css/bootstrap/bootstrap.min.css'}" rel="stylesheet">
+    <script th:src="@{'../js/bootstrap.min.js'}"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center">
+       <h2 class="fw-bolder" th:text="${authUser.names}">Admin Dashboard</h2>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper ">
+        <nav class="sidebar sidebar-offcanvas " id="sidebar">
+          <ul class="nav">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                    <i class="bi bi-person-circle fs-1"></i>
+              </a>
+            </li>
+            <li class="nav-item nav-category fw-bolder text-center">Admin</li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{'/admin'}">
+                <i class="menu-icon typcn typcn-document-text"></i>
+                <span class="menu-title">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'/admin/tomb'}">
+                  <span class="menu-title">Tomb</span>
+                </a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{'/admin/maintenance'}">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Maintainance</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{'/admin/decease'}">
+                <span class="menu-title">Decease</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{'/admin/customer'}">
+                <span class="menu-title">Customer</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{'/admin/request'}">
+                <span class="menu-title">Requests</span>
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'/admin/payments'}">
+                  <span class="menu-title">Payment</span>
+                </a>
+              </li>
+              <li class="nav-item bg-secondary">
+                <a class="nav-link" th:href="@{'/admin/account'}">
+                  <span class="menu-title">Account</span>
+                </a>
+              </li>
+              <li class="nav-item mt-3">
+                <a class="nav-link" th:href="@{'/logout?logout'}">
+                  <span class="menu-title">Sign out</span>
+                </a>
+              </li>
+          </ul>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row page-title-header">
+<div class="row rounded">
+    <div class="col-md-6 m-auto grid-margin rounded">
+      <div class="card">
+        <div class="card-body">
+         <h2><span th:text="${authUser.names}"></span> 's Profile</h2>
+         <div class="mb-3"><b>Names </b><span th:text="${authUser.names}"></span></div>
+         <div class="mb-3"><b>Email </b><span th:text="${authUser.email}"></span></div>
+         <div class="mb-3"><b>Phone Number </b><span th:text="${authUser.phoneNumber}"></span></div>
+         <div class="mb-3"><b>Role </b><span th:text="${authUser.role}"></span></div>
+         <form class="m-3 text-center" action="" method="post">
+            <button th:id="${authUser.id}" type="button" data-bs-toggle="modal" data-bs-target="#delete" class="btn btn-primary">Delete</button>
+            <button th:id="${authUser.id}+'&'+${authUser.names}+'&'+${authUser.email}+'&'+${authUser.phoneNumber}" onclick="getDetail(this)" type="button" data-bs-toggle="modal" data-bs-target="#update" class="btn btn-primary">Update</button>
+         </form>
+        </div>
+    </div>
+    </div>
+   </div> 
+   <script>
+    function getDetail(btn)
+    {
+      var id = btn.getAttribute('id');
+      var detail=id.split('&');
+      document.getElementById('Cid').value=detail[0];
+      document.getElementById('cname').value=detail[1];
+      document.getElementById('cemail').value=detail[2];
+      document.getElementById('cphone').value=detail[3];
+    }
+   </script>
+   <!--  -->
+
+
+    <div class="modal fade" id="update" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+          <div class="modal-content">
+              <div class="modal-header bg-success">
+                  <h5 class="modal-title text-light" id="modalTitleId">Update Account</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form th:action="@{'/admin/updateaccount'}" th:object="${customer}" method="post">
+                  <input type="hidden" th:field="*{id}" id="Cid">
+                  <div  class="mb-3">
+                    <input id="cname" class="w-100 border-0 border-bottom border-dark" type="text" required th:field="*{names}" placeholder="Name">
+                  </div>
+                  <div class="mb-3">
+                    <input id="cemail" class="w-100 border-0 border-bottom border-dark" type="email" required th:field="*{email}" placeholder="Email Name">
+                  </div>
+                  <div class="mb-3">
+                    <input id="cphone" class="w-100 border-0 border-bottom border-dark" type="text" required th:field="*{phoneNumber}" placeholder="Phone Number">
+                  </div>
+                  <div class="mb-3">
+                    <input class="w-100 border-0 border-bottom border-dark" type="password" required th:field="*{password}" placeholder="Password">
+                  </div>
+                  <div class="mb-3">
+                    <input class="w-100 border-0 border-bottom border-dark" type="password" required  placeholder="Retype Password">
+                  </div>
+                  <div class="d-grid gap-2 modal-footer">
+                    <button type="submit"class="btn btn-outline-secondary text-center">Update Account</button>
+                  </div>
+                  </form>
+              </div>
+          </div>
+        </div>
+    </div>
+
+   <!--  Delete-->
+   <div class="modal fade" id="delete" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title text-light" id="modalTitleId">Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{'/admin/account/delete'}" th:object="${customer}" method="post">
+                  <span th:text="${authUser.names}"></span>  Are you sure you want to delete your Account
+                 <input th:value="${authUser.id}" type="hidden" name="id">
+                  <input type="hidden" th:field="*{id}" >
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+              
+            </div>
+           
+        </div>
+    </div>
+   </div>
+  </body>
+</html>

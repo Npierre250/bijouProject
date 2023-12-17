@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Account</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link th:href="@{'../css/bootstrap/bootstrap.min.css'}" rel="stylesheet">
+    <script th:src="@{'../js/bootstrap.min.js'}">
+          </script>
+        <link rel="stylesheet" th:href="@{'../style.css'}">
+      </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center">
+       <h2 class="fw-bolder"><span th:text="${authUser.names}"></span></h2>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper ">
+        <nav class="sidebar sidebar-offcanvas " id="sidebar">
+          <ul class="nav">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                    <i class="bi bi-person-circle fs-1"></i>
+              </a>
+            </li>
+            <li class="nav-item nav-category fw-bolder text-center" th:text="${authUser.names}">Admin</li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{'/user'}">
+                <i class="menu-icon typcn typcn-document-text"></i>
+                <span class="menu-title">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'/user/request'}">
+                  <span class="menu-title">Request</span>
+                </a>
+              </li>
+            <li class="nav-item bg-secondary">
+              <a class="nav-link" th:href="@{/user/account}">
+                <i class="menu-icon typcn typcn-shopping-bag"></i>
+                <span class="menu-title">Account</span>
+              </a>
+            </li>
+          
+       
+              <li class="nav-item mt-3">
+                <a class="nav-link" th:href="@{'/logout?logout'}">
+                  <span class="menu-title">Sign out</span>
+                </a>
+              </li>
+          </ul>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <!-- Page Title Header Starts-->
+            <div class="row page-title-header">
+
+<div class="row">
+    <div class="col-md-5 m-auto grid-margin">
+      <div class="card">
+        <div class="card-body">
+        <h4 class="mb-4"><span th:text="${authUser.names}"></span> 's Account</h4>
+        <nav class="mb-3"><b>Names </b><span th:text="${authUser.names}"></span></nav>
+        <nav class="mb-3"><b>Email </b><span th:text="${authUser.email}"></span></nav>
+        <nav class="mb-3"><b>Names </b><span th:text="${authUser.phoneNumber}"></span></nav>
+        <nav>
+          <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete">Delete</button> 
+          <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#update">Update</button></nav>
+        </div>
+    </div>
+    </div>
+   </div> 
+  </body>
+  <!-- modals -->
+  <section>
+<!-- Modal Body-->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalTitleId">Delete Account</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form action="/customer/delete" th:object="${authUser}"  method="post">
+            <input type="hidden" th:field="*{id}" th:value="${authUser.id}" id="identity">
+            Do you want to delete your account "<b th:text="${authUser.names}"></b>"
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-outline-danger">Delete Account</button>
+            </div>
+          </form>
+        </div>
+      </div> 
+    </div>
+  </div>
+</div>
+<section>
+  <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="modalTitleId">Update Account</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+           <form th:object="${authUser}" action="/user/account"  method="post">
+            <input type="hidden" th:value="${authUser.id}" th:field="*{id}">
+            <div>
+              <label  class="fw-bolder">Name</label>
+              <input th:field="*{names}" type="text" th:value="${authUser.names}" class="w-100 border-0 border-bottom border-dark">
+            </div>
+            <div>
+              <label class="fw-bolder">Email</label>
+              <input type="text" th:value="${authUser.email}" th:field="*{email}" class="w-100 border-0 border-bottom border-dark">
+            </div>
+            <div>
+              <label class="fw-bolder">Phone Number</label>
+              <input th:field="*{phoneNumber}" type="text" th:value="${authUser.phoneNumber}" class="w-100 border-0 border-bottom border-dark">
+            </div>
+            <div>
+              <label class="fw-bolder">Password</label>
+              <input type="text" name="password" class="w-100 border-0 border-bottom border-dark">
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-outline-secondary">Update Account</button>
+            </div>
+           </form>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+  </section>
+</html>
